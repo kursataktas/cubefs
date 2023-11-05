@@ -2919,7 +2919,6 @@ func (mw *MetaWrapper) lockDir(mp *MetaPartition, inode uint64, lease uint64, lo
 	return
 }
 
-<<<<<<< HEAD
 func (mw *MetaWrapper) inodeAccessTimeGet(mp *MetaPartition, inode uint64) (status int, info *proto.InodeAccessTime, err error) {
 	bgTime := stat.BeginStat()
 	defer func() {
@@ -2927,23 +2926,12 @@ func (mw *MetaWrapper) inodeAccessTimeGet(mp *MetaPartition, inode uint64) (stat
 	}()
 
 	req := &proto.InodeGetRequest{
-=======
-//=======
-func (mw *MetaWrapper) renewalForbiddenMigration(mp *MetaPartition, inode uint64) (status int, err error) {
-	bgTime := stat.BeginStat()
-	defer func() {
-		stat.EndStat("renewalForbiddenMigration", err, bgTime, 1)
-	}()
-
-	req := &proto.RenewalForbiddenMigrationRequest{
->>>>>>> 88de16bc53 (feature(client,metanode):[hybrid cloud] support renewal inode forbidden migration)
 		VolName:     mw.volname,
 		PartitionID: mp.PartitionID,
 		Inode:       inode,
 	}
 
 	packet := proto.NewPacketReqID()
-<<<<<<< HEAD
 	packet.Opcode = proto.OpMetaInodeAccessTimeGet
 	packet.PartitionID = mp.PartitionID
 	err = packet.MarshalData(req)
@@ -2952,19 +2940,6 @@ func (mw *MetaWrapper) renewalForbiddenMigration(mp *MetaPartition, inode uint64
 		return
 	}
 
-=======
-	packet.Opcode = proto.OpMetaRenewalForbiddenMigration
-	packet.PartitionID = mp.PartitionID
-	err = packet.MarshalData(req)
-	if err != nil {
-		log.LogErrorf("renewalForbiddenMigration: ino(%v) err(%v)", inode, err)
-		return
-	}
-
-	log.LogDebugf("renewalForbiddenMigration enter: packet(%v) mp(%v) req(%v)",
-		packet, mp, string(packet.Data))
-
->>>>>>> 88de16bc53 (feature(client,metanode):[hybrid cloud] support renewal inode forbidden migration)
 	metric := exporter.NewTPCnt(packet.GetOpMsg())
 	defer func() {
 		metric.SetWithLabels(err, map[string]string{exporter.Vol: mw.volname})
@@ -2972,18 +2947,13 @@ func (mw *MetaWrapper) renewalForbiddenMigration(mp *MetaPartition, inode uint64
 
 	packet, err = mw.sendToMetaPartition(mp, packet)
 	if err != nil {
-<<<<<<< HEAD
 		log.LogErrorf("inodeAccessTimeGet: packet(%v) mp(%v) req(%v) err(%v)", packet, mp, *req, err)
-=======
-		log.LogErrorf("renewalForbiddenMigration: packet(%v) mp(%v) req(%v) err(%v)", packet, mp, *req, err)
->>>>>>> 88de16bc53 (feature(client,metanode):[hybrid cloud] support renewal inode forbidden migration)
 		return
 	}
 
 	status = parseStatus(packet.ResultCode)
 	if status != statusOK {
 		err = errors.New(packet.GetResultMsg())
-<<<<<<< HEAD
 		log.LogErrorf("inodeAccessTimeGet: packet(%v) mp(%v) req(%v) result(%v)", packet, mp, *req, packet.GetResultMsg())
 		return
 	}
@@ -2994,12 +2964,47 @@ func (mw *MetaWrapper) renewalForbiddenMigration(mp *MetaPartition, inode uint64
 		return
 	}
 	return statusOK, resp.Info, nil
-=======
+}
+
+func (mw *MetaWrapper) renewalForbiddenMigration(mp *MetaPartition, inode uint64) (status int, err error) {
+	bgTime := stat.BeginStat()
+	defer func() {
+		stat.EndStat("renewalForbiddenMigration", err, bgTime, 1)
+	}()
+
+	req := &proto.RenewalForbiddenMigrationRequest{
+		VolName:     mw.volname,
+		PartitionID: mp.PartitionID,
+		Inode:       inode,
+	}
+
+	packet := proto.NewPacketReqID()
+	packet.Opcode = proto.OpMetaRenewalForbiddenMigration
+	packet.PartitionID = mp.PartitionID
+	err = packet.MarshalData(req)
+	if err != nil {
+		log.LogErrorf("renewalForbiddenMigration: ino(%v) err(%v)", inode, err)
+		return
+	}
+
+	metric := exporter.NewTPCnt(packet.GetOpMsg())
+	defer func() {
+		metric.SetWithLabels(err, map[string]string{exporter.Vol: mw.volname})
+	}()
+
+	packet, err = mw.sendToMetaPartition(mp, packet)
+	if err != nil {
+		log.LogErrorf("renewalForbiddenMigration: packet(%v) mp(%v) req(%v) err(%v)", packet, mp, *req, err)
+		return
+	}
+
+	status = parseStatus(packet.ResultCode)
+	if status != statusOK {
+		err = errors.New(packet.GetResultMsg())
 		log.LogErrorf("renewalForbiddenMigration: packet(%v) mp(%v) req(%v) result(%v)", packet, mp, *req, packet.GetResultMsg())
 		return
 	}
 
 	log.LogDebugf("renewalForbiddenMigration exit: packet(%v) mp(%v) req(%v)", packet, mp, *req)
 	return statusOK, nil
->>>>>>> 88de16bc53 (feature(client,metanode):[hybrid cloud] support renewal inode forbidden migration)
 }

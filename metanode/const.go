@@ -195,9 +195,9 @@ const (
 
 	opFSMVerListSnapShot = 73
 
-	opFSMInternalFreeForbiddenMigrationInode = 75
-	opFSMForbiddenMigrationInode             = 76
-	opFSMRenewalForbiddenMigration           = 77
+	opFSMInternalFreeForbiddenMigrationInode = 76
+	opFSMForbiddenMigrationInode             = 77
+	opFSMRenewalForbiddenMigration           = 78
 )
 
 var exporterKey string
