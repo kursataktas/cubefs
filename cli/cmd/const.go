@@ -161,6 +161,9 @@ const (
 	CliFlagVersionList        = "verList"
 	CliFlagVersionDel         = "verDel"
 	CliFlagVersionSetStrategy = "verSetStrategy"
+
+	CliFlagAllowedStorageClass = "allowedStorageClass"
+	CliFlagVolStorageClass     = "volStorageClass"
 )
 
 type MasterOp int
