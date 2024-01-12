@@ -98,6 +98,9 @@ type (
 
 	//Client -> MetaNode
 	UpdateExtentKeyAfterMigrationRequest = proto.UpdateExtentKeyAfterMigrationRequest
+
+	//Client -> MetaNode, used for debugging
+	SetCreateTimeRequest = proto.SetCreateTimeRequest
 )
 
 // op code should be fixed, order change will cause raft fsm log apply fail
@@ -198,10 +201,12 @@ const (
 
 	opFSMVerListSnapShot = 73
 
+	// hybrid cloud
 	opFSMInternalFreeForbiddenMigrationInode = 76
 	opFSMForbiddenMigrationInode             = 77
 	opFSMRenewalForbiddenMigration           = 78
-	opFSMUpdateExtentKeyAfterMigration       = 78
+	opFSMUpdateExtentKeyAfterMigration       = 79
+	opFSMSetInodeCreateTime                  = 80 //for debug
 )
 
 var exporterKey string
