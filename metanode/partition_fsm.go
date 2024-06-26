@@ -988,7 +988,7 @@ func (mp *metaPartition) HandleLeaderChange(leader uint64) {
 		ino.StorageClass = mp.volStorageClass
 		go mp.initInode(ino)
 	}
-	//refresh forbidden migration list
+	// refresh forbidden migration list
 	mp.refreshForbiddenMigrationList()
 }
 

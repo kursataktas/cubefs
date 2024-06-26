@@ -93,13 +93,13 @@ type (
 	// Client -> MetaNode
 	GetUniqIDResp = proto.GetUniqIDResponse
 
-	//Client -> MetaNode
+	// Client -> MetaNode
 	RenewalForbiddenMigrationRequest = proto.RenewalForbiddenMigrationRequest
 
-	//Client -> MetaNode
+	// Client -> MetaNode
 	UpdateExtentKeyAfterMigrationRequest = proto.UpdateExtentKeyAfterMigrationRequest
 
-	//Client -> MetaNode, used for debugging
+	// Client -> MetaNode, used for debugging
 	SetCreateTimeRequest = proto.SetCreateTimeRequest
 
 	DeleteMigrationExtentKeyRequest = proto.DeleteMigrationExtentKeyRequest
@@ -209,7 +209,7 @@ const (
 	opFSMRenewalForbiddenMigration           = 78
 	opFSMUpdateExtentKeyAfterMigration       = 79
 	opFSMInternalFreeInodeMigrationExtentKey = 80
-	opFSMSetInodeCreateTime                  = 81 //for debug
+	opFSMSetInodeCreateTime                  = 81 // for debug
 	opFSMDeleteMigrationExtentKey            = 82
 	opFSMInternalDeleteMigrationExtentKey    = 83
 )
