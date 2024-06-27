@@ -146,6 +146,10 @@ const (
 	CliFlagTrashInterval                = "trashInterval"
 	CliFlagAccessTimeValidInterval      = "accessTimeValidInterval"
 	CliFlagEnablePersistAccessTime      = "enablePersistAccessTime"
+	CliFlagAllowedStorageClass          = "allowedStorageClass"
+	CliFlagVolStorageClass              = "volStorageClass"
+	CliFlagMediaType                    = "mediaType"
+
 	// CliFlagSetDataPartitionCount	= "count" use dp-count instead
 
 	// Shorthand format of resource name
@@ -161,9 +165,6 @@ const (
 	CliFlagVersionList        = "verList"
 	CliFlagVersionDel         = "verDel"
 	CliFlagVersionSetStrategy = "verSetStrategy"
-
-	CliFlagAllowedStorageClass = "allowedStorageClass"
-	CliFlagVolStorageClass     = "volStorageClass"
 )
 
 type MasterOp int
