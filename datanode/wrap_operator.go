@@ -753,7 +753,7 @@ func (s *DataNode) handleBatchMarkDeletePacket(p *repl.Packet, c net.Conn) {
 			return
 		}
 
-		log.LogInfof(fmt.Sprintf("recive DeleteExtent (%v) from (%v)", ext, c.RemoteAddr().String()))
+		log.LogInfof(fmt.Sprintf("[handleBatchMarkDeletePacket] recive DeleteExtent (%v) from (%v)", ext, c.RemoteAddr().String()))
 		partition.disk.allocCheckLimit(proto.IopsWriteType, 1)
 		writable := partition.disk.limitWrite.TryRun(0, func() {
 			if storage.IsTinyExtent(ext.ExtentId) || ext.IsSnapshotDeletion {
@@ -774,7 +774,7 @@ func (s *DataNode) handleBatchMarkDeletePacket(p *repl.Packet, c net.Conn) {
 				err = partition.ExtentStore().MarkDelete(ext.ExtentId, 0, 0)
 			}
 			if err != nil {
-				log.LogErrorf("action[handleBatchMarkDeletePacket]: failed to mark delete extent(%v), %v", ext.ExtentId, err)
+				log.LogErrorf("action[handleBatchMarkDeletePacket]: failed to mark delete normalExtent extent(%v), %v", ext.ExtentId, err)
 			}
 		})
 

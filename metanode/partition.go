@@ -828,7 +828,7 @@ func (mp *metaPartition) onStart(isCreate bool) (err error) {
 	go mp.runVersionOp()
 
 	mp.volType = volumeInfo.VolType
-	mp.volStorageClass = volumeInfo.VolStorageClass
+	mp.volStorageClass = volumeInfo.VolStorageClass // TODO: tangjingyu handle compatibility with old version master
 
 	if proto.IsCold(mp.volType) || proto.IsVolSupportStorageClass(volumeInfo.AllowedStorageClass, proto.StorageClass_BlobStore) {
 		mp.blobClientWrapper, err = NewBlobStoreClientWrapper(access.Config{
