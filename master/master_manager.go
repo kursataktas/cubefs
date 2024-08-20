@@ -206,8 +206,6 @@ func (m *Server) loadMetadata() {
 	if err = m.cluster.startDecommissionListTraverse(); err != nil {
 		panic(err)
 	}
-	log.LogInfo("action[loadMetadata] end")
-	syslog.Println("action[loadMetadata] end")
 
 	log.LogInfo("action[loadUserInfo] begin")
 	if err = m.user.loadUserStore(); err != nil {
