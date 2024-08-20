@@ -204,14 +204,14 @@ const (
 	opFSMVerListSnapShot = 73
 
 	// hybrid cloud
-	opFSMInternalFreeForbiddenMigrationInode = 76
-	opFSMForbiddenMigrationInode             = 77
-	opFSMRenewalForbiddenMigration           = 78
-	opFSMUpdateExtentKeyAfterMigration       = 79
-	opFSMInternalFreeInodeMigrationExtentKey = 80
-	opFSMSetInodeCreateTime                  = 81 // for debug
-	opFSMDeleteMigrationExtentKey            = 82
-	opFSMInternalDeleteMigrationExtentKey    = 83
+	opFSMInternalFreeForbiddenMigrationInode = 85
+	opFSMForbiddenMigrationInode             = 86
+	opFSMRenewalForbiddenMigration           = 87
+	opFSMUpdateExtentKeyAfterMigration       = 88
+	opFSMInternalFreeInodeMigrationExtentKey = 89
+	opFSMSetInodeCreateTime                  = 90 // for debug
+	opFSMDeleteMigrationExtentKey            = 91
+	opFSMInternalDeleteMigrationExtentKey    = 93
 )
 
 var exporterKey string
